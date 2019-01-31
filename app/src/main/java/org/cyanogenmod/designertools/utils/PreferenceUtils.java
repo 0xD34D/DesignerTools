@@ -136,6 +136,7 @@ public class PreferenceUtils {
 
     public static class MockPreferences {
         public static final String KEY_MOCK_OPACITY = "mock_opacity";
+        public static final String KEY_MOCK_MARGIN = "mock_margin";
         public static final String KEY_MOCKUP_OVERLAY_PORTRAIT = "mockup_overlay_portrait";
         public static final String KEY_MOCKUP_OVERLAY_LANDSCAPE = "mock_overlay_landscape";
         public static final String KEY_MOCK_OVERLAY_ACTIVE = "mock_overlay_active";
@@ -147,6 +148,14 @@ public class PreferenceUtils {
 
         public static int getMockOpacity(Context context, int defValue) {
             return getInt(context, KEY_MOCK_OPACITY, defValue);
+        }
+
+        public static void setMockMargin(Context context, int opacity) {
+            putInt(context, KEY_MOCK_MARGIN, opacity);
+        }
+
+        public static int getMockMargin(Context context, int defValue) {
+            return getInt(context, KEY_MOCK_MARGIN, defValue);
         }
 
         public static void setPortraitMocupkOverlay(Context context, String pathOrUri) {

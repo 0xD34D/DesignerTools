@@ -1,8 +1,8 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.1"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
     defaultConfig {
         applicationId "com.scheffsblend.designertools"
@@ -23,7 +23,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:28.0.0'
     compile 'org.cyanogenmod:platform.sdk:6.0'
     compile 'com.larswerkman:lobsterpicker:1.0.1'
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'

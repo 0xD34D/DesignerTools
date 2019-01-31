@@ -41,6 +41,7 @@
     <string name="landscape">Landscape</string>
     <string name="reset_mokcups">Reset mockups</string>
     <string name="opacity_format">%d %% Opacity</string>
+    <string name="margin_format">%d px Margin Top</string>
 
     <!-- Quick setting tile labels -->
     <string name="grid_qs_tile_label">Grid</string>

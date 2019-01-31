@@ -49,6 +49,8 @@ public class MockupOverlayCardFragmnt extends DesignerToolCardFragment {
     Button mReset;
     TextView mOpacityText;
     SeekBar mOpacityLevel;
+    TextView mMarginText;
+    SeekBar mMarginLevel;
 
     @Override
     public void onResume() {
@@ -109,6 +111,29 @@ public class MockupOverlayCardFragmnt extends DesignerToolCardFragment {
         });
         int opacity = MockPreferences.getMockOpacity(getContext(), 10);
         setOpacityLevel(opacity);
+
+        mMarginText = (TextView) v.findViewById(R.id.margin_text);
+        mMarginLevel = (SeekBar) v.findViewById(R.id.margin);
+        mMarginLevel.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                int margin = (progress);
+                MockPreferences.setMockMargin(getContext(), margin);
+                setMarginLevel(margin);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        int margin = MockPreferences.getMockMargin(getContext(), 0);
+        setMarginLevel(margin);
 
         return base;
     }
@@ -181,6 +206,11 @@ public class MockupOverlayCardFragmnt extends DesignerToolCardFragment {
     private void setOpacityLevel(int opacity) {
         mOpacityText.setText(getContext().getString(R.string.opacity_format, opacity));
         mOpacityLevel.setProgress(opacity / 10 - 1);
+    }
+
+    private void setMarginLevel(int margin) {
+        mMarginText.setText(getContext().getString(R.string.margin_format, margin));
+        mMarginLevel.setProgress(margin);
     }
 
     private Intent getPickImageIntent() {

@@ -194,6 +194,7 @@ public class MockOverlay extends Service {
             prefs.registerOnSharedPreferenceChangeListener(mPreferenceChangeListener);
             setImageBitmap(getBitmapForOrientation(getResources().getConfiguration().orientation));
             setImageAlpha(MockPreferences.getMockOpacity(getContext(), 10));
+            setTranslationY(MockPreferences.getMockMargin(getContext(), 0));
             invalidate();
         }
 
@@ -228,6 +229,9 @@ public class MockOverlay extends Service {
                     invalidate();
                 } else if (MockPreferences.KEY_MOCK_OPACITY.equals(key)) {
                     setImageAlpha(MockPreferences.getMockOpacity(getContext(), 10));
+                    invalidate();
+                } else if (MockPreferences.KEY_MOCK_MARGIN.equals(key)) {
+                    setTranslationY(MockPreferences.getMockMargin(getContext(), 0));
                     invalidate();
                 }
             }

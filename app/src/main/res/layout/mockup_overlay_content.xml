@@ -110,4 +110,20 @@
         android:layout_height="wrap_content"
         android:max="8"/>
 
+    <TextView
+        android:id="@+id/margin_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="12sp"
+        android:textColor="?android:attr/textColorPrimary"/>
+
+    <SeekBar
+        android:id="@+id/margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:max="200"/>
+
 </LinearLayout>
