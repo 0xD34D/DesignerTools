@@ -49,4 +49,7 @@
     <color name="colorPickerNodeClearColor">#00000000</color>
     <color name="colorPickerMagnifierGridColor">#ff000000</color>
 
+    <color name="statusBarColor">#B3FFFFFF</color>
+    <color name="navigationBarColor">#B3000000</color>
+
 </resources>

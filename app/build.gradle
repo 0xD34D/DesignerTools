@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "com.scheffsblend.designertools"
         minSdkVersion 24
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 3
         versionName "2.1.0"
         setProperty("archivesBaseName", "DesignerTools-$versionName")
@@ -23,7 +23,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    implementation 'androidx.appcompat:appcompat:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'org.cyanogenmod:platform.sdk:6.0'
     implementation 'com.larswerkman:lobsterpicker:1.0.1'
     implementation 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
