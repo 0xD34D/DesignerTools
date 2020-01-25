@@ -15,16 +15,25 @@
  */
 package org.cyanogenmod.designertools.ui;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.annotation.Nullable;
+
 import org.cyanogenmod.designertools.R;
+import org.cyanogenmod.designertools.overlays.ColorPickerOverlay;
+import org.cyanogenmod.designertools.qs.ColorPickerQuickSettingsTile;
 import org.cyanogenmod.designertools.qs.OnOffTileState;
 import org.cyanogenmod.designertools.utils.LaunchUtils;
 import org.cyanogenmod.designertools.utils.PreferenceUtils.ColorPickerPreferences;
@@ -34,7 +43,7 @@ public class ColorPickerCardFragment extends DesignerToolCardFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
         View base = super.onCreateView(inflater, container, savedInstanceState);
         setTitleText(R.string.header_title_color_picker);
         setTitleSummary(R.string.header_summary_color_picker);

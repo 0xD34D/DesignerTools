@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2016 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +14,25 @@
      limitations under the License.
 -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_container"
     android:layout_width="match_parent"
     android:layout_height="64dp">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/img_header_bg"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_header_bg" />
 
     <TextView
+        android:id="@+id/header_title_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
-        android:textSize="20sp"
+        android:layout_marginTop="24dp"
+        android:drawableStart="@drawable/ic_header_glyph"
         android:text="@string/app_name"
-        android:drawableStart="@drawable/ic_header_glyph"/>
+        android:textSize="20sp" />
 
 </FrameLayout>
 

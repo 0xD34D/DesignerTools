@@ -42,7 +42,9 @@ import android.media.projection.MediaProjection;
 import android.media.projection.MediaProjectionManager;
 import android.os.Handler;
 import android.os.IBinder;
+
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
+
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -153,6 +155,8 @@ public class ColorPickerOverlay extends Service {
     }
 
     private void setup() {
+        startForeground(NOTIFICATION_ID, getPersistentNotification(true));
+
         mWindowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
         setupMediaProjection();
 
@@ -217,7 +221,6 @@ public class ColorPickerOverlay extends Service {
         filter.addAction(ACTION_HIDE_PICKER);
         filter.addAction(ACTION_SHOW_PICKER);
         registerReceiver(mReceiver, filter);
-        startForeground(NOTIFICATION_ID, getPersistentNotification(true));
     }
 
     private void removeViewIfAttached(View v) {
@@ -231,7 +234,7 @@ public class ColorPickerOverlay extends Service {
         removeViewIfAttached(mMagnifierNodeView);
     }
 
-    private void addOverlayViewsIfDetached () {
+    private void addOverlayViewsIfDetached() {
         if (mMagnifierNodeView != null && !mMagnifierNodeView.isAttachedToWindow()) {
             mWindowManager.addView(mMagnifierNodeView, mNodeParams);
         }
@@ -443,6 +446,7 @@ public class ColorPickerOverlay extends Service {
         final PendingIntent pi = PendingIntent.getBroadcast(this, 0,
                 new Intent(actionIsHide ? ACTION_HIDE_PICKER : ACTION_SHOW_PICKER), 0);
 
+
         return NotificationUtils.createForegroundServiceNotification(
                 this,
                 CHANNEL_ID,
@@ -471,19 +475,19 @@ public class ColorPickerOverlay extends Service {
 
     private ImageReader.OnImageAvailableListener mImageAvailableListener =
             new ImageReader.OnImageAvailableListener() {
-        @Override
-        public void onImageAvailable(ImageReader reader) {
-            synchronized (mScreenCaptureLock) {
-                Image newImage = reader.acquireNextImage();
-                if (newImage != null) {
-                    if (!mAnimating && mMagnifierView != null) {
-                        mMagnifierView.setPixels(getScreenBitmapRegion(newImage, mPreviewArea));
+                @Override
+                public void onImageAvailable(ImageReader reader) {
+                    synchronized (mScreenCaptureLock) {
+                        Image newImage = reader.acquireNextImage();
+                        if (newImage != null) {
+                            if (!mAnimating && mMagnifierView != null) {
+                                mMagnifierView.setPixels(getScreenBitmapRegion(newImage, mPreviewArea));
+                            }
+                            newImage.close();
+                        }
                     }
-                    newImage.close();
                 }
-            }
-        }
-    };
+            };
 
     private BroadcastReceiver mReceiver = new BroadcastReceiver() {
         @Override

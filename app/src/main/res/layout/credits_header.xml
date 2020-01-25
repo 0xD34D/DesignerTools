@@ -15,6 +15,8 @@
      limitations under the License.
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_container"
     android:layout_width="match_parent"
     android:layout_height="136dp"
     android:orientation="vertical">
@@ -25,21 +27,28 @@
         android:src="@drawable/img_header_bg"
         android:scaleType="center"/>
 
-    <ImageView
-        android:id="@+id/header_glyph"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="16dp"
-        android:src="@drawable/ic_header_glyph"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/header_title_container"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/header_glyph"
-        android:layout_alignStart="@id/header_glyph"
-        android:textSize="34sp"
-        android:text="Credits"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:orientation="vertical"
+        tools:ignore="UseCompoundDrawables">
+
+        <ImageView
+            android:id="@+id/header_glyph"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_header_glyph" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credits"
+            android:textSize="34sp" />
+    </LinearLayout>
 
 </RelativeLayout>
 

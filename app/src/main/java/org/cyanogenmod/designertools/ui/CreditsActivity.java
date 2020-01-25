@@ -20,14 +20,21 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.os.Bundle;
+
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import android.view.View;
 import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 
 import org.cyanogenmod.designertools.R;
+import org.cyanogenmod.designertools.utils.EdgeToEdgeUtils;
 
 public class CreditsActivity extends Activity {
 
@@ -36,6 +43,7 @@ public class CreditsActivity extends Activity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(0, 0);
         setContentView(R.layout.activity_credits);
+        goEdgeToEdge();
     }
 
     private void circularRevealActivity(View v) {
@@ -159,5 +167,35 @@ public class CreditsActivity extends Activity {
         set.play(anim2).with(anim3);
         set.play(anim3).with(anim4);
         set.start();
+    }
+
+    private void goEdgeToEdge() {
+        View decorView = getWindow().getDecorView();
+        EdgeToEdgeUtils.addEdgeToEdgeFlags(decorView);
+
+        final LinearLayout container = findViewById(R.id.activity_credits);
+        container.setClipToPadding(false);
+
+        final View headerContainer = findViewById(R.id.header_container);
+        final View headerTitleContainer = findViewById(R.id.header_title_container);
+
+        final ViewGroup.LayoutParams params = headerContainer.getLayoutParams();
+        final int headerHeight = headerContainer.getLayoutParams().height;
+
+        EdgeToEdgeUtils.addEdgeToEdgeFlags(container);
+
+        EdgeToEdgeUtils.requestAndApplyInsets(container, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View ignored, WindowInsetsCompat insets) {
+                container.setPadding(0, 0, 0, insets.getSystemWindowInsetBottom());
+
+                params.height = headerHeight + insets.getSystemWindowInsetTop();
+                headerContainer.setLayoutParams(params);
+
+                headerTitleContainer.setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
+
+                return insets;
+            }
+        });
     }
 }

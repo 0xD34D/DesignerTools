@@ -19,9 +19,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.core.view.OnApplyWindowInsetsListener;
+import androidx.core.view.WindowInsetsCompat;
+
 import org.cyanogenmod.designertools.R;
+import org.cyanogenmod.designertools.utils.EdgeToEdgeUtils;
 import org.cyanogenmod.designertools.utils.LaunchUtils;
 
 public class DesignerToolsActivity extends Activity {
@@ -38,6 +44,8 @@ public class DesignerToolsActivity extends Activity {
         if (headerGlyph != null) {
             headerGlyph.setOnClickListener(mGlyphClickListener);
         }
+
+        goEdgeToEdge();
     }
 
     private View.OnClickListener mGlyphClickListener = new View.OnClickListener() {
@@ -46,4 +54,34 @@ public class DesignerToolsActivity extends Activity {
             startActivity(new Intent(DesignerToolsActivity.this, CreditsActivity.class));
         }
     };
+
+    private void goEdgeToEdge() {
+        View decorView = getWindow().getDecorView();
+        EdgeToEdgeUtils.addEdgeToEdgeFlags(decorView);
+
+        final ScrollView container = findViewById(R.id.main_container);
+        container.setClipToPadding(false);
+
+        final View headerContainer = findViewById(R.id.header_container);
+        final View headerTitleContainer = findViewById(R.id.header_title_container);
+
+        final ViewGroup.LayoutParams params = headerContainer.getLayoutParams();
+        final int headerHeight = headerContainer.getLayoutParams().height;
+
+        EdgeToEdgeUtils.addEdgeToEdgeFlags(container);
+
+        EdgeToEdgeUtils.requestAndApplyInsets(container, new OnApplyWindowInsetsListener() {
+            @Override
+            public WindowInsetsCompat onApplyWindowInsets(View ignored, WindowInsetsCompat insets) {
+                container.setPadding(0, 0, 0, insets.getSystemWindowInsetBottom());
+
+                params.height = headerHeight + insets.getSystemWindowInsetTop();
+                headerContainer.setLayoutParams(params);
+
+                headerTitleContainer.setPadding(0, insets.getSystemWindowInsetTop(), 0, 0);
+
+                return insets;
+            }
+        });
+    }
 }
